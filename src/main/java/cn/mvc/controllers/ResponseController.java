@@ -11,4 +11,8 @@ public class ResponseController {
         return "index";
     }
 
+    @RequestMapping("/response2")
+    public String response2(){
+        return "main";
+    }
 }
