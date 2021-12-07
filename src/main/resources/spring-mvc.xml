@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/tool"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd">
+
+<!--    扫描包-->
+    <context:component-scan base-package="cn.mvc.controllers">
+    </context:component-scan>
+
+<!--    访问静态资源-->
+<!--    <mvc:annotation-driver/>-->
+
+<!--    将映射的地址直接指向静态资源文件夹-->
+<!--    <mvc:resources mapping="/images/**" location="/images/"/>-->
+
+<!--    <mvc:default-servlet-handler/>-->
+
+<!--    默认视图解析器 配上前缀和后缀 viewResolver简化 逻辑视图名称-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" name="viewResolver">
+        <property name="prefix" value="/WEB-INF/view/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+</beans>
