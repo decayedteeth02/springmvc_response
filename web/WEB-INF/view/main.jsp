@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-    测试
+    测试 :${requestScope.type}
 </body>
 </html>
