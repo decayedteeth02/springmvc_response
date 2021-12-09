@@ -1,10 +1,12 @@
 package cn.mvc.controllers;
 
+import cn.mvc.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -73,8 +75,45 @@ public class DTVController {
 //    required 用来设置session中某个属性必须存在，否则就会报错
 //    用来映射你上一个addAttribute的值
     @RequestMapping("/annotation/session")
-    public String session03(@SessionAttribute(value = "type",required = false) String type){
+    public String session03(@SessionAttribute(value = "type",required = false) String type,Model model){
         System.out.println(type);
+        return "main";
+    }
+
+    @RequestMapping("/ModelAttribut/session")
+    public String session04(){
+        session2.setAttribute("type","ModelAttribute-session");
+        return "main";
+    }
+
+//    通过@ModelAttribute获取Servlet api--session
+//    解决：
+//    1.自己定义mysql语句，只更新指定的那些字段
+//    2.如果无法定制sql语句，可以在更新在前查询，只能在springmvc绑定请求参数之前查询，利用@ModelAttribute就可以在绑定参数之前查询
+
+    HttpSession session2;
+    @ModelAttribute
+    //@ModelAttribute 写在方法上面 @ModelAttribute 会在当前处理器中处理所有的处理方法钱调用
+    public void showModelAttribute(HttpSession session){
+        System.out.println("showModelAttribute");
+        this.session2=session;
+    }
+
+    @ModelAttribute
+    public void initUser(Model model){
+//        在数据库中查询user select * from User
+        User user=new User();
+        user.setId(1);
+        user.setUsername("cc");
+        user.setPassword("123456");
+        model.addAttribute("user",user);
+        //spring mvc在进行参数绑定之前，会将model中的根参数名符合拿出来并合并，新提交的就会覆盖，确实的字段就会保留
+    }
+
+    @RequestMapping("/update")
+    public String update(User user) {
+        //update user set id=?,username=?,password=? where id=?
+        System.out.println(user);
         return "main";
     }
 
