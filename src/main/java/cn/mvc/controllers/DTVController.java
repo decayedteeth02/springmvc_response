@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
@@ -86,10 +87,18 @@ public class DTVController {
         return "main";
     }
 
+    @RequestMapping("/thread/test")
+    public String session05(String name, HttpServletRequest request) throws InterruptedException {
+        String username=name;
+        Thread.sleep(3000);
+        session2.setAttribute("type",username);
+        return "main";
+    }
+
 //    通过@ModelAttribute获取Servlet api--session
 //    解决：
 //    1.自己定义mysql语句，只更新指定的那些字段
-//    2.如果无法定制sql语句，可以在更新在前查询，只能在springmvc绑定请求参数之前查询，利用@ModelAttribute就可以在绑定参数之前查询
+//    2.如果无法定制sq.l语句，可以在更新在前查询，只能在springmvc绑定请求参数之前查询，利用@ModelAttribute就可以在绑定参数之前查询
 
     HttpSession session2;
     @ModelAttribute

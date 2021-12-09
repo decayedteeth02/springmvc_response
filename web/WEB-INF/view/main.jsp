@@ -14,5 +14,7 @@
     测试 :${requestScope.type}
 <p></p>
     session获取：${sessionScope.type}
+<p></p>
+用户:${requestScope.user}
 </body>
 </html>
