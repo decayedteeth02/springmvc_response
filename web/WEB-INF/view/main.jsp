@@ -12,5 +12,7 @@
 </head>
 <body>
     测试 :${requestScope.type}
+<p></p>
+    session获取：${sessionScope.type}
 </body>
 </html>
