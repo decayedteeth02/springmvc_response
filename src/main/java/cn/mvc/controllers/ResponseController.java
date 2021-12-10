@@ -12,4 +12,18 @@ public class ResponseController {
     }
 
 
+//    return默认是转发
+//    forward需要自己返回完整的视图逻辑名路径
+    @RequestMapping("/response2")
+    public String response2(){
+        return "forward:login.jsp";
+    }
+
+
+//    redirect 重定向必须加上 不参与视图解析器
+//    springmvc会在底层给我们加上项目名
+    @RequestMapping("/response3")
+    public String response3(){
+        return "redirect:/login.jsp";
+    }
 }
